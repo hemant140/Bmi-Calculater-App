@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names, avoid_unnecessary_containers
 
+import 'package:bmi_calculator_app/Methods/bmi_cal_methods.dart';
+import 'package:bmi_calculator_app/Screens/result_page.dart';
+import 'package:bmi_calculator_app/components/iconwithlevel.dart';
 import 'package:bmi_calculator_app/components/reuseable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-enum GenderSelection { Male, Female }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,9 +15,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final inActiveColor = Color(0xff1de33);
-  final ActiveColor = Color(0xff1de33);
-  // late GenderSelection selection;
+  Color maleColor = inActiveColor;
+  Color femaleColor = inActiveColor;
+  void UpdateColor(GenderSelection gendertype) {
+    if (gendertype == GenderSelection.Male) {
+      maleColor = ActiveColor;
+      femaleColor = inActiveColor;
+    }
+    if (gendertype == GenderSelection.Female) {
+      maleColor = inActiveColor;
+      femaleColor = ActiveColor;
+    }
+  }
+
   int _Height = 150;
   int _weight = 50;
   int _Age = 18;
@@ -37,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                       child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        // selection = GenderSelection.Male;
+                        UpdateColor(GenderSelection.Male);
                       });
                     },
                     child: Container(
@@ -62,10 +73,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       margin: EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: Color(
-                            0xff1d1e33), //selection == GenderSelection.Male
-                        //? ActiveColor
-                        //: inActiveColor,
+                        color: maleColor, 
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -74,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                       child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        // selection = GenderSelection.Female;
+                        UpdateColor(GenderSelection.Female);
                       });
                     },
                     child: Container(
@@ -99,10 +107,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       margin: EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: Color(
-                            0xff1d1e33), //selection == GenderSelection.Female
-                        //? inActiveColor
-                        //: ActiveColor,
+                        color:
+                            femaleColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -312,7 +318,15 @@ class _HomePageState extends State<HomePage> {
               constraints:
                   BoxConstraints.tightFor(height: 50, width: double.infinity),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  calculateBMI calculateBmi = calculateBMI(_Height, _weight,);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ResultPage(
+                        calculateBmi.calBMI(),
+                        calculateBmi.getResult(),
+                        calculateBmi.feedBack()
+                      )));
+                },
                 child: Text(
                   "CALCULATE YOUR BMI",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
