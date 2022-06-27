@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
-import 'package:bmi_calculator_app/components/iconwithlevel.dart';
 import 'package:bmi_calculator_app/components/reuseable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+enum GenderSelection { Male, Female }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +14,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final inActiveColor = Color(0xff1de33);
+  final ActiveColor = Color(0xff1de33);
+  // late GenderSelection selection;
   int _Height = 150;
   int _weight = 50;
   int _Age = 18;
@@ -29,20 +33,80 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  reusableCard(
-                    color: Color(0xff1d1e33),
-                    myChild: iconWithLevel(
-                      icon: FontAwesomeIcons.mars,
-                      lable: 'MALE',
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // selection = GenderSelection.Male;
+                      });
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Icon(
+                              FontAwesomeIcons.mars,
+                              size: 80,
+                            ),
+                          ),
+                          SizedBox(height: 22),
+                          Container(
+                            child: Text(
+                              "MALE",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Color(
+                            0xff1d1e33), //selection == GenderSelection.Male
+                        //? ActiveColor
+                        //: inActiveColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  reusableCard(
-                    color: Color(0xff1d1e33),
-                    myChild: iconWithLevel(
-                      icon: FontAwesomeIcons.mars,
-                      lable: 'FEMALE',
+                  )),
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // selection = GenderSelection.Female;
+                      });
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Icon(
+                              FontAwesomeIcons.venus,
+                              size: 80,
+                            ),
+                          ),
+                          SizedBox(height: 22),
+                          Container(
+                            child: Text(
+                              "FEMALE",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Color(
+                            0xff1d1e33), //selection == GenderSelection.Female
+                        //? inActiveColor
+                        //: ActiveColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
+                  )),
                 ],
               ),
             ),
@@ -138,14 +202,37 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              RoundButton(
-                                  color: Color(0xff0a0E21),
-                                  icon: FontAwesomeIcons.plus,
-                                  onpress: () {}),
-                              RoundButton(
-                                  color: Color(0xff0a0E21),
-                                  icon: FontAwesomeIcons.minus,
-                                  onpress: () {}),
+                              RawMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _weight++;
+                                  });
+                                },
+                                elevation: 8,
+                                child: Icon(FontAwesomeIcons.plus, size: 15),
+                                constraints: BoxConstraints.tightFor(
+                                    height: 56, width: 56),
+                                shape: CircleBorder(),
+                                fillColor: Color(0xff0a0E21),
+                                highlightColor: Color(0xFFFF1744),
+                                splashColor: Color(0xFFFF1744),
+                              ),
+                              SizedBox(width: 5),
+                              RawMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _weight--;
+                                  });
+                                },
+                                elevation: 8,
+                                child: Icon(FontAwesomeIcons.minus, size: 15),
+                                constraints: BoxConstraints.tightFor(
+                                    height: 56, width: 56),
+                                shape: CircleBorder(),
+                                fillColor: Color(0xff0a0E21),
+                                highlightColor: Color(0xFFFF1744),
+                                splashColor: Color(0xFFFF1744),
+                              ),
                             ],
                           ),
                         ]),
@@ -175,29 +262,70 @@ class _HomePageState extends State<HomePage> {
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              // Container(
-                              //   child: Text("Kg"),
-                              // ),
+                              Container(
+                                child: Text("yr"),
+                              ),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              RoundButton(
-                                  color: Color(0xff0a0E21),
-                                  icon: FontAwesomeIcons.plus,
-                                  onpress: () {}),
-                              RoundButton(
-                                  color: Color(0xff0a0E21),
-                                  icon: FontAwesomeIcons.minus,
-                                  onpress: () {}),
+                              RawMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _Age++;
+                                  });
+                                },
+                                elevation: 8,
+                                child: Icon(FontAwesomeIcons.plus, size: 15),
+                                constraints: BoxConstraints.tightFor(
+                                    height: 56, width: 56),
+                                shape: CircleBorder(),
+                                fillColor: Color(0xff0a0E21),
+                                highlightColor: Color(0xFFFF1744),
+                                splashColor: Color(0xFFFF1744),
+                              ),
+                              SizedBox(width: 5),
+                              RawMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _Age--;
+                                  });
+                                },
+                                elevation: 8,
+                                child: Icon(FontAwesomeIcons.minus, size: 15),
+                                constraints: BoxConstraints.tightFor(
+                                    height: 56, width: 56),
+                                shape: CircleBorder(),
+                                fillColor: Color(0xff0a0E21),
+                                highlightColor: Color(0xFFFF1744),
+                                splashColor: Color(0xFFFF1744),
+                              ),
                             ],
                           ),
                         ]),
                   ),
                 ],
               ),
-            )
+            ),
+            ConstrainedBox(
+              constraints:
+                  BoxConstraints.tightFor(height: 50, width: double.infinity),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "CALCULATE YOUR BMI",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFFFF1744),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -221,6 +349,8 @@ class RoundButton extends StatelessWidget {
       constraints: BoxConstraints.tightFor(height: 56, width: 56),
       shape: CircleBorder(),
       fillColor: color,
+      highlightColor: Color(0xFFFF1744),
+      splashColor: Color(0xFFFF1744),
     );
   }
 }
