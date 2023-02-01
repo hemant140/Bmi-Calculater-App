@@ -5,12 +5,17 @@ A new Flutter project.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+Application is calculate of BMI and Gives a Advised According there BMI.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Desgin UI this App 
+-- Using Widgets
+-- Fully Functional
+-- USING DART 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+Its Gives and Calculated Accurate BMI 
+
+ScreenShots of App
+![merge_from_ofoct](https://user-images.githubusercontent.com/106432154/216169838-4eb0c606-7267-4d63-9abd-eb0dc08b552c.jpg)
+
